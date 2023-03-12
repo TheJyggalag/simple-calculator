@@ -52,3 +52,51 @@ public class Calculus {
         System.out.println("The derivative of sin(x) at x = " + x + " is " + value);
     }
 }
+
+public class AbstractAlgebra {
+    private final int n;
+
+    public AbstractAlgebra(int n) {
+        this.n = n;
+    }
+
+    // Function to calculate the additive inverse of a given element
+    public int additiveInverse(int x) {
+        return (n - x) % n;
+    }
+
+    // Function to calculate the product of two given elements
+    public int multiply(int x, int y) {
+        return (x * y) % n;
+    }
+
+    // Function to calculate the power of a given element to a given exponent
+    public int power(int x, int exp) {
+        if (exp == 0) {
+            return 1;
+        }
+        int p = power(x, exp/2);
+        if (exp % 2 == 0) {
+            return multiply(p, p);
+        }
+        else {
+            return multiply(multiply(p, p), x);
+        }
+    }
+
+    public static void main(String[] args) {
+        AbstractAlgebra algebra = new AbstractAlgebra(5);
+
+        // Calculate the additive inverse of 2
+        int additiveInverse = algebra.additiveInverse(2);
+        System.out.println("The additive inverse of 2 is " + additiveInverse);
+
+        // Calculate the product of 2 and 3
+        int product = algebra.multiply(2, 3);
+        System.out.println("The product of 2 and 3 is " + product);
+
+        // Calculate the power of 2 to the exponent 3
+        int power = algebra.power(2, 3);
+        System.out.println("2 raised to the power of 3 is " + power);
+    }
+}
